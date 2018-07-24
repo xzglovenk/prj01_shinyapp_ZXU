@@ -12,10 +12,12 @@ shinyUI(dashboardPage(
         sidebarUserPanel("Zhenggang Xu",
                          image = "https://yt3.ggpht.com/-04uuTMHfDz4/AAAAAAAAAAI/AAAAAAAAAAA/Kjeupp-eNNg/s100-c-k-no-rj-c0xffffff/photo.jpg"),
         sidebarMenu(
-            menuItem("Introduction", tabName = "intro",icon = icon("intro")),
+#            menuItem("Introduction", tabName = "intro",icon = icon("intro")),
+            menuItem("Introduction", tabName = "intro2",icon = icon("intro2")),
             menuItem("Respondent Profile", tabName = "profile", icon = icon("profile")),
             menuItem("About Work", tabName = "workstat", icon = icon("workstat")),
-            menuItem("Life Style", tabName = "lifeStyle", icon = icon("lifeStyle"))
+            menuItem("Life Style", tabName = "lifeStyle", icon = icon("lifeStyle")),
+            menuItem("Summary", tabName = "summary01",icon = icon("summary"))
 
         )
  
@@ -25,20 +27,37 @@ shinyUI(dashboardPage(
             tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
         ),
 ###################################################        
-        tabItems(
-            tabItem(tabName = "intro",
-                    fluidRow(
-                      box(
-                        tags$h1("Introduction"), 
-                        tags$br(), 
-                        tags$h3(tags$li("Stack Overflow is the home for programmers to share and learn.\n 
-                        In January 2018, it conducted its annual survey and received ~100,000 responses.")),
-                        tags$h3(tags$li("The survey is hight standardized so the response data set is mostly categorized. ")),
-                        tags$h3(tags$li("The survey is hight standardized so the response data set is mostly categorized. ")),
-                      width = 10))
-              
-            ),
+         tabItems(
+        #     tabItem(tabName = "intro",
+        #             fluidRow(
+        #               box(
+        #                 tags$h1("Introduction"), 
+        #                 tags$br(), 
+        #                 tags$h3(tags$li("Stack Overflow is the home for programmers to share and learn.\n 
+        #                 In January 2018, it conducted its annual survey and received ~100,000 responses.")),
+        #                 tags$h3(tags$li("The survey is hight standardized so the response data set is mostly categorized. ")),
+        #                 tags$h3(tags$li("The survey is hight standardized so the response data set is mostly categorized. ")),
+        #               width = 10))
+        #       
+        #     ),
 
+            tabItem(tabName = "intro2",
+                    fluidRow(
+                      column(7, htmlOutput("introText")),
+                      column(5,
+                      img(
+                        src = "https://pbs.twimg.com/media/DYGaYA3XcAAzVUu.jpg",
+                        width = 400,
+                        align = "right"
+                        ),
+                      img(
+                        src = "https://i.pinimg.com/736x/ca/47/94/ca4794cfada458717c7aa99093a1f425--computer-humor-computer-science.jpg",
+                        width = 400,
+                        align = "right"
+                      )
+                    )
+                    )
+            ),
             # 
             tabItem(tabName = "profile",
                     fluidRow(
@@ -61,9 +80,9 @@ shinyUI(dashboardPage(
                           box(
                             title = "Distributed by country",
                             width = 12,
-                            htmlOutput("map01"),
-                            bubblesOutput("distrChart1", width = "100%", height = 600)
                             
+                            bubblesOutput("distrChart1", width = "100%", height = 600),
+                            htmlOutput("map01")
                           )
                         ),
                         
@@ -80,9 +99,9 @@ shinyUI(dashboardPage(
             tabItem(tabName = "workstat",
                     fluidRow(
                       tabBox(
-                        title = "Work Related",
+                        title = "About work",
                         # The id lets us use input$tabset1 on the server to find the current tab
-                        id = "tabset1", height = "250px",
+                        id = "tabset1", height = "220px",
                         tabPanel("Programming Language",
                                  fluidRow(
                                  selectizeInput("languageStat",
@@ -94,13 +113,13 @@ shinyUI(dashboardPage(
                                  fluidRow(
                                    conditionalPanel(
                                      condition = "input.languageStat == 'LanguageWorkedWith'",
-                                     bubblesOutput("LanguageChart1", width = "100%", height = 600)
+                                     bubblesOutput("LanguageChart1", width = "100%", height = 550)
                                      
                                    ), 
                                    conditionalPanel(
                                   
                                      condition = "input.languageStat == 'LanguageDesireNextYear'",
-                                     bubblesOutput("LanguageChart2", width = "100%", height = 600)
+                                     bubblesOutput("LanguageChart2", width = "100%", height = 550)
                                      
                                      
                                    ) 
@@ -109,7 +128,7 @@ shinyUI(dashboardPage(
                                  )
                                  
                         ),
-                        tabPanel("Job Satisfaction",
+                        tabPanel("Satisfied with your job?",
                                  fluidRow(
                                  selectizeInput("factors",
                                                 "Choose one factor",
@@ -165,16 +184,19 @@ shinyUI(dashboardPage(
                         condition = "input.attribute2 =='--------'",
                         box(
                           width = 12, status = "info", solidHeader = TRUE,
-                          title = "Life Style",
+                          title = "",
                           column(12, plotlyOutput("lifeStyleChart1", height = 500))
                         )
                         
                       ), 
                       conditionalPanel(
                         condition = "input.attribute2 !='--------'",
+                        
+                        column(8, htmlOutput("tableName")),
+                        
                         box(
                           width = 12, status = "info", solidHeader = TRUE,
-                          title = "Life Style",
+                          title = "",
                           column(12, plotOutput("lifeStyleChart2", height = 700))
                         )
                         
@@ -182,7 +204,25 @@ shinyUI(dashboardPage(
                       
                     )
                     
-            )
+            ),
+
+          tabItem(tabName = "summary01",
+            fluidRow(
+              column(7, htmlOutput("summText")),
+                column(5,
+                 img(
+                   src = "https://pbs.twimg.com/profile_images/827209517133922304/rXsfgt6O.jpg",
+                   width = 500,
+                   align = "right"
+                 )
+                 # img(
+                 #   src = "https://i.pinimg.com/736x/ca/47/94/ca4794cfada458717c7aa99093a1f425--computer-humor-computer-science.jpg",
+                 #   width = 400,
+                 #   align = "right"
+                 # )
+                )
+             )
+          )
  
         )
     )

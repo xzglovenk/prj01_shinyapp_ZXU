@@ -1,0 +1,13 @@
+name: SO_survey_v01
+title: SO_survey_v01
+username:
+account: xzglovenk
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 386830
+bundleId: 1496438
+url: https://xzglovenk.shinyapps.io/SO_survey_v01/
+when: 1532407322.67275
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: www/.DS_Store

@@ -8,7 +8,34 @@ library(ggplot2)
 shinyServer(function(input, output){
 
  ##################################
-  output$map01 <- renderGvis({
+
+  output$introText <- renderText({
+    "<h1> Introduction\n </h1>
+    <br>
+    <h3>
+      <li> Stack Overflow is the home for programmers to share and learn.</li></h3> 
+      
+    <h3>
+      <li> Every year they conduct a suvery of their site visitors, giving us the opportunity to learn more about the programmer community. 
+      </li>
+    </h3>
+    <h3>
+      <li> I analyzed a subset of the 2018 survey and trying to get some insights from it, here is something I want to figure out:
+    </h3>
+    <br>
+      <h3><ul><li> What are the distributions of the respondents acorss countries, genders, education backgrouds...
+        </li>
+        <br>
+        <li> What are their favorite languages? How do they like their jobs?
+        </li>
+        <br>
+        <li> Programmers' life can be busy. Do they live a healthy life? 
+        </li></ul>
+      </li></h3>"
+  })
+  
+  
+    output$map01 <- renderGvis({
     
     survey_data %>% group_by(.,Country) %>% tally() -> survey_country
     
@@ -140,6 +167,10 @@ shinyServer(function(input, output){
       )
     })
     
+    output$tableName <- renderText({
+      paste("                                               ","<h3>", input$attribute2, "vs. ", input$attribute1, "</h3>")
+    })
+    
     output$lifeStyleChart2 <- renderPlot({
       #  if given two attributes a mosaic plot will be generated.  
       #  first step make a contengincy table for the two attributes 
@@ -148,5 +179,25 @@ shinyServer(function(input, output){
       #mosaicplot(tbl_2d, shade = TRUE)
       assocplot(tbl_2d, xlab = input$attribute1, ylab = input$attribute2)
     })
+    
+    output$summText <- renderText({
+      "<h1> Summary\n </h1>
+      <br>
+      <h3><li> Big gap between populations of male and female programmers.
+      </li>
+      </h3>
+      <h3><li> Learn python!!!
+      </li>
+      </h3>
+      <h3><li> Be a little picky when choosing jobs.
+      </li>
+      <h3>
+      <h3><li> Live a healthy life! 
+      </li>
+      </h3>
+      "
+  })
+  
+    
 }    
 )
