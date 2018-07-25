@@ -186,10 +186,10 @@ shinyServer(function(input, output){
       <h3><li> Big gap between populations of male and female programmers.
       </li>
       </h3>
-      <h3><li> Learn python!!!
+      <h3><li> Learn python, learn python and learn python. 
       </li>
       </h3>
-      <h3><li> Be a little picky when choosing jobs.
+      <h3><li> Consider company size when choosing jobs.
       </li>
       <h3>
       <h3><li> Live a healthy life! 

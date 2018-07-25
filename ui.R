@@ -45,16 +45,11 @@ shinyUI(dashboardPage(
                     fluidRow(
                       column(7, htmlOutput("introText")),
                       column(5,
-                      img(
-                        src = "https://pbs.twimg.com/media/DYGaYA3XcAAzVUu.jpg",
-                        width = 400,
-                        align = "right"
-                        ),
-                      img(
-                        src = "https://i.pinimg.com/736x/ca/47/94/ca4794cfada458717c7aa99093a1f425--computer-humor-computer-science.jpg",
-                        width = 400,
-                        align = "right"
-                      )
+                             img(
+                               src = "https://images.sunfrogshirts.com/2017/01/17/71560-1484661047587-Gildan-Hoo-Black-_w92_-front.jpg",
+                               width = 500,
+                               align = "right"
+                             )
                     )
                     )
             ),
@@ -211,8 +206,13 @@ shinyUI(dashboardPage(
               column(7, htmlOutput("summText")),
                 column(5,
                  img(
-                   src = "https://pbs.twimg.com/profile_images/827209517133922304/rXsfgt6O.jpg",
-                   width = 500,
+                   src = "https://pbs.twimg.com/media/DYGaYA3XcAAzVUu.jpg",
+                   width = 400,
+                   align = "right"
+                 ),
+                 img(
+                   src = "https://i.pinimg.com/736x/ca/47/94/ca4794cfada458717c7aa99093a1f425--computer-humor-computer-science.jpg",
+                   width = 400,
                    align = "right"
                  )
                  # img(

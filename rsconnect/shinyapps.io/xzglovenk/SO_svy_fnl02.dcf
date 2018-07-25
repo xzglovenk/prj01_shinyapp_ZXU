@@ -1,0 +1,13 @@
+name: SO_svy_fnl02
+title: SO_svy_fnl02
+username:
+account: xzglovenk
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 387352
+bundleId: 1498043
+url: https://xzglovenk.shinyapps.io/SO_svy_fnl02/
+when: 1532472384.61764
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: www/.DS_Store
