@@ -5,9 +5,9 @@ account: xzglovenk
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 387352
-bundleId: 1498043
+bundleId: 1500632
 url: https://xzglovenk.shinyapps.io/SO_svy_fnl02/
-when: 1532472384.61764
+when: 1532557853.03135
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: www/.DS_Store

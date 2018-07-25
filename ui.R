@@ -123,6 +123,26 @@ shinyUI(dashboardPage(
                                  )
                                  
                         ),
+                        
+                        tabPanel("Salaries! ",
+                                 fluidRow(
+                                  selectizeInput("factors2",
+                                                  "Choose one factor",
+                                                  choice = c("Gender", "FormalEducation","CompanySize","Hobby","HoursComputer"),
+                                                  selected = "Gender"
+                                   )
+                                 ),
+                                 fluidRow(
+                                   box(
+                                     width = 12, status = "info", solidHeader = TRUE,
+                                     title = "Salary Distributions",
+                                     column(12, plotlyOutput("salaryCharts", height = 500))
+                                   )
+                                 )
+                                 
+                                 ),
+                        
+                        
                         tabPanel("Satisfied with your job?",
                                  fluidRow(
                                  selectizeInput("factors",

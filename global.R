@@ -27,6 +27,8 @@ survey_data$CompanySize <- factor(survey_data$CompanySize, levels = c("<10", "10
 
 survey_data$SalaryRange <- factor(survey_data$SalaryRange, levels = c("<50k", "50k~100k", "100k~150k","150k~200k", ">200k"))
 
+survey_data$FormalEducation <- factor(survey_data$FormalEducation, levels = c("No degree", "Associate", "Bachelor","Master", "Other doctoral", "Professional"))
+
 
 
 

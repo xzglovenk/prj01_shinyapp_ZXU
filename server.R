@@ -128,6 +128,19 @@ shinyServer(function(input, output){
     
     
 #################################################################
+    output$salaryCharts <- renderPlotly({
+      temp01_usa = survey_data %>% filter(.,Country == "United States")
+      # if the second attributes is empty, only one attribute will be drawn in bar chart. 
+      print(
+        ggplotly(
+          
+          ggplot(temp01_usa, aes_string(x = input$factors2, y = "ConvertedSalary")) + geom_boxplot() + scale_y_log10(limits = c(5000, 1000000)) + theme_economist() + scale_fill_economist() + xlab("Job Satisfaction Score")+ylab("Salary in log10 scale")+
+            theme(text = element_text(size=14), plot.title = element_text(size = 24), axis.title.x = element_text(size = 16),axis.title.y = element_text(size = 16))+ggtitle(paste0("Salary vs. ",input$factors2), subtitle = NULL)
+          
+        )
+      )
+    })  
+#################################################################
     
     output$satisfactionChart1 <- renderPlotly({
       temp01_usa = survey_data %>% filter(.,Country == "United States")
