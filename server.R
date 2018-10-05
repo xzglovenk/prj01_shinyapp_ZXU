@@ -58,8 +58,6 @@ shinyServer(function(input, output){
               key = countrydata$Country, 
               color = rainbow(10, alpha = NULL),
               tooltip = countrydata$n)
-      
-      
     })
     
     # Generate bar charts for different attributes (eg. gender, education, undergraduate major, etc.)
@@ -77,11 +75,7 @@ shinyServer(function(input, output){
             theme_economist() + scale_fill_economist() + xlab(input$distribution1)+ylab("Count of Respondents")+
             theme(text = element_text(size=14), plot.title = element_text(size = 24), axis.title.x = element_text(size = 16),axis.title.y = element_text(size = 16))+
             ggtitle(paste0("Distribution by ", input$distribution1)), subtitle = NULL)
-            
-             
-
         )
-      
     })
 
 #################################################################
@@ -102,8 +96,6 @@ shinyServer(function(input, output){
               key = languageData1$singleLanguage,
               color = rainbow(10, alpha = NULL),
               tooltip = languageData1$n)
-
-
     })
     
     output$LanguageChart2 <-renderBubbles({
@@ -123,10 +115,7 @@ shinyServer(function(input, output){
               key = languageData2$singleLanguage,
               color = rainbow(10, alpha = NULL),
               tooltip = languageData2$n)
-      
-      
     })
-    
     
 #################################################################
     output$salaryCharts <- renderPlotly({
@@ -137,7 +126,6 @@ shinyServer(function(input, output){
           
           ggplot(temp01_usa, aes_string(x = input$factors2, y = "ConvertedSalary")) + geom_boxplot() + scale_y_log10(limits = c(5000, 1000000)) + theme_economist() + scale_fill_economist() + xlab(input$factors2)+ylab("Salary in log10 scale")+
             theme(text = element_text(size=14), plot.title = element_text(size = 24), axis.title.x = element_text(size = 16),axis.title.y = element_text(size = 16))+ggtitle(paste0("Salary vs. ",input$factors2), subtitle = NULL)
-          
         )
       )
     })  
@@ -161,8 +149,7 @@ shinyServer(function(input, output){
       #  second step generate the assocplot. 
       assocplot(tbl_2d, xlab = input$factors, ylab = "JobSatisfaction")
     })  
-    
-    
+
 #################################################################
     output$lifeStyleChart1 <- renderPlotly({
       # if the second attributes is empty, only one attribute will be drawn in bar chart. 
@@ -208,7 +195,5 @@ shinyServer(function(input, output){
       </h3>
       "
   })
-  
-    
 }    
 )

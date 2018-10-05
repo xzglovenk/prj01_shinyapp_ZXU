@@ -79,7 +79,6 @@ shinyUI(dashboardPage(
                         ) 
                       )
                     )
-                    
             ),
 ######################################################            
             tabItem(tabName = "workstat",
@@ -210,11 +209,8 @@ shinyUI(dashboardPage(
                           title = "",
                           column(12, plotOutput("lifeStyleChart2", height = 700))
                         )
-                        
                       ) 
-                      
                     )
-                    
             ),
           # summary page
           tabItem(tabName = "summary01",
@@ -239,7 +235,6 @@ shinyUI(dashboardPage(
                 )
              )
           )
- 
         )
     )
 ))
