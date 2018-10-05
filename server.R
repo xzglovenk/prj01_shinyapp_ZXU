@@ -33,8 +33,9 @@ shinyServer(function(input, output){
         </li></ul>
       </li></h3>"
   })
-  
-  
+ 
+############################################################# 
+    # generate a gvis map object for the country statistics. 
     output$map01 <- renderGvis({
     
     survey_data %>% group_by(.,Country) %>% tally() -> survey_country
@@ -42,7 +43,7 @@ shinyServer(function(input, output){
     gvisexample <- gvisGeoChart(survey_country, "Country", "n", 
                                 options=list(width=800, height=600))
   })
-  
+
     output$distrChart1 <-renderBubbles({
       
       #show bubble chart for country distribution
@@ -61,13 +62,14 @@ shinyServer(function(input, output){
       
     })
     
- 
+    # Generate bar charts for different attributes (eg. gender, education, undergraduate major, etc.)
     output$distrChart2 <-renderPlotly({
       temp_svydata01 = survey_data%>%
         group_by_(.,input$distribution1) %>% 
         summarise(.,count = n())%>%
         arrange(desc(count))
 
+      
       print(
         ggplotly(
           ggplot(temp_svydata01,aes_string(x = paste0("reorder(",input$distribution1,", count)"), y = "count")) + 
@@ -85,7 +87,7 @@ shinyServer(function(input, output){
 #################################################################
     output$LanguageChart1 <-renderBubbles({
 
-      #show bubble chart for country distribution
+      #show bubble chart for distribution of language people are using right now
       languageData1 <- survey_data%>% 
         select(.,LanguageWorkedWith) %>% 
         mutate(singleLanguage = str_split(LanguageWorkedWith, pattern = ";")) %>% 
@@ -106,7 +108,7 @@ shinyServer(function(input, output){
     
     output$LanguageChart2 <-renderBubbles({
       
-      #show bubble chart for country distribution
+      #show bubble chart for the distribution of language people want to learn next year
       languageData2 <- survey_data%>% 
         select(.,LanguageDesireNextYear) %>% 
         mutate(singleLanguage = str_split(LanguageDesireNextYear, pattern = ";")) %>% 
@@ -126,7 +128,6 @@ shinyServer(function(input, output){
     })
     
     
-    
 #################################################################
     output$salaryCharts <- renderPlotly({
       temp01_usa = survey_data %>% filter(.,Country == "United States")
@@ -134,7 +135,7 @@ shinyServer(function(input, output){
       print(
         ggplotly(
           
-          ggplot(temp01_usa, aes_string(x = input$factors2, y = "ConvertedSalary")) + geom_boxplot() + scale_y_log10(limits = c(5000, 1000000)) + theme_economist() + scale_fill_economist() + xlab("Job Satisfaction Score")+ylab("Salary in log10 scale")+
+          ggplot(temp01_usa, aes_string(x = input$factors2, y = "ConvertedSalary")) + geom_boxplot() + scale_y_log10(limits = c(5000, 1000000)) + theme_economist() + scale_fill_economist() + xlab(input$factors2)+ylab("Salary in log10 scale")+
             theme(text = element_text(size=14), plot.title = element_text(size = 24), axis.title.x = element_text(size = 16),axis.title.y = element_text(size = 16))+ggtitle(paste0("Salary vs. ",input$factors2), subtitle = NULL)
           
         )
@@ -144,13 +145,10 @@ shinyServer(function(input, output){
     
     output$satisfactionChart1 <- renderPlotly({
       temp01_usa = survey_data %>% filter(.,Country == "United States")
-      # if the second attributes is empty, only one attribute will be drawn in bar chart. 
       print(
         ggplotly(
-          
           ggplot(temp01_usa, aes(x = JobSatisfaction)) + geom_bar() + coord_flip() + theme_economist() + scale_fill_economist() + xlab("Job Satisfaction Score")+ylab("Count of Respondents")+
             theme(text = element_text(size=14), plot.title = element_text(size = 24), axis.title.x = element_text(size = 16),axis.title.y = element_text(size = 16))+ggtitle(paste0("Statistics on Job Satisfaction"), subtitle = NULL)
-          
         )
       )
     })
@@ -160,8 +158,7 @@ shinyServer(function(input, output){
       #  first step make a contengincy table for the two attributes 
       temp02_usa = survey_data %>% filter(.,Country == "United States")
       tbl_2d = table(temp02_usa[,input$factors, drop = T], temp02_usa[,"JobSatisfaction", drop = T])
-      #  second step generate the mosaicplot. 
-      #mosaicplot(tbl_2d, shade = TRUE)
+      #  second step generate the assocplot. 
       assocplot(tbl_2d, xlab = input$factors, ylab = "JobSatisfaction")
     })  
     
@@ -174,8 +171,6 @@ shinyServer(function(input, output){
           
           ggplot(survey_data,aes_string(x = input$attribute1)) + geom_bar() + coord_flip()+theme_economist() + scale_fill_economist() + xlab(input$attribute1)+ylab("Count of Respondents")+
             theme(text = element_text(size=14), plot.title = element_text(size = 24), axis.title.x = element_text(size = 16),axis.title.y = element_text(size = 16))+ggtitle(paste0("Statistics on ", input$attribute1), subtitle = NULL)
-          
-          
         )
       )
     })
@@ -196,7 +191,7 @@ shinyServer(function(input, output){
     output$summText <- renderText({
       "<h1> Summary\n </h1>
       <br>
-      <h3><li> Big gap between populations of male and female programmers.
+      <h3><li> The developer community is booming, considerable gender gap still exists. 
       </li>
       </h3>
       <h3><li> Learn python, learn python and learn python. 
@@ -205,7 +200,10 @@ shinyServer(function(input, output){
       <h3><li> Consider company size when choosing jobs.
       </li>
       <h3>
-      <h3><li> Live a healthy life! 
+      <h3><li> Live a healthy life!
+      </li>
+      </h3>
+      <h3><li> Happy coding!
       </li>
       </h3>
       "

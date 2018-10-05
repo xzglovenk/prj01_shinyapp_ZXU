@@ -28,19 +28,7 @@ shinyUI(dashboardPage(
         ),
 ###################################################        
          tabItems(
-        #     tabItem(tabName = "intro",
-        #             fluidRow(
-        #               box(
-        #                 tags$h1("Introduction"), 
-        #                 tags$br(), 
-        #                 tags$h3(tags$li("Stack Overflow is the home for programmers to share and learn.\n 
-        #                 In January 2018, it conducted its annual survey and received ~100,000 responses.")),
-        #                 tags$h3(tags$li("The survey is hight standardized so the response data set is mostly categorized. ")),
-        #                 tags$h3(tags$li("The survey is hight standardized so the response data set is mostly categorized. ")),
-        #               width = 10))
-        #       
-        #     ),
-
+## Introduction Page ##
             tabItem(tabName = "intro2",
                     fluidRow(
                       column(7, htmlOutput("introText")),
@@ -53,9 +41,10 @@ shinyUI(dashboardPage(
                     )
                     )
             ),
-            # 
+            # Profile page
             tabItem(tabName = "profile",
                     fluidRow(
+                      # Dropdown menu for selecting different factors, use 'Country' as default
                       selectizeInput("distribution1",
                                      "Distribution factor",
                                      choice = c("Country","Gender", "FormalEducation", "UndergradMajor", "YearsCoding"),
@@ -63,24 +52,26 @@ shinyUI(dashboardPage(
                       )
                     ),
                     fluidRow(
+                      # Title box
                       box(
                         width = 10, status = "info", solidHeader = TRUE,
                         title = "Distribution by different catergory",
                         
-                        
+                        # Showing different content for different choice users make.
+                        # Different object will be passed if 'Country' is selected. So conditional panel is used.
                         conditionalPanel(
                           
                           condition = "input.distribution1 =='Country'",
-                          # uiOutput('chart')
+                        
                           box(
                             title = "Distributed by country",
                             width = 12,
-                            
+                            # Show both bubble plot and map view for respondent distribution
                             bubblesOutput("distrChart1", width = "100%", height = 600),
                             htmlOutput("map01")
                           )
                         ),
-                        
+                        # Show plotly object
                         conditionalPanel(
                           condition = "input.distribution1 !='Country'",
                           # uiOutput('chart')
@@ -93,6 +84,7 @@ shinyUI(dashboardPage(
 ######################################################            
             tabItem(tabName = "workstat",
                     fluidRow(
+                      # tabBox shows different content for different tab
                       tabBox(
                         title = "About work",
                         # The id lets us use input$tabset1 on the server to find the current tab
@@ -105,6 +97,7 @@ shinyUI(dashboardPage(
                                                 selected = "LanguageWorkedWith"
                                  )
                                  ),
+                                 # Again use conditional panel to show different bubble plot
                                  fluidRow(
                                    conditionalPanel(
                                      condition = "input.languageStat == 'LanguageWorkedWith'",
@@ -128,7 +121,7 @@ shinyUI(dashboardPage(
                                  fluidRow(
                                   selectizeInput("factors2",
                                                   "Choose one factor",
-                                                  choice = c("Gender", "FormalEducation","CompanySize","Hobby","HoursComputer"),
+                                                  choice = c("Gender", "FormalEducation","CompanySize"),
                                                   selected = "Gender"
                                    )
                                  ),
@@ -152,6 +145,7 @@ shinyUI(dashboardPage(
                                  )
                                  ),
                                  fluidRow(
+                                   # For default the overall distribution of satisfaction score is shown
                                    conditionalPanel(
                                      condition = "input.factors == '--------'",
                                      box(
@@ -161,6 +155,7 @@ shinyUI(dashboardPage(
                                      )
                                      
                                    ), 
+                                   # Show the satisfaction distribution
                                    conditionalPanel(
                                      condition = "input.factors != '--------'",
                                      box(
@@ -181,7 +176,6 @@ shinyUI(dashboardPage(
             
             tabItem(tabName = "lifeStyle",
                     fluidRow(
-                      
                       selectizeInput("attribute1",
                                      "Select an Attribute to Display",
                                      choice = c("SkipMeals","HoursComputer", "Exercise")
@@ -195,6 +189,7 @@ shinyUI(dashboardPage(
                     
                     
                     fluidRow(
+                      # for default, only one attribute is selected. Show the bar chart of different life style. 
                       conditionalPanel(
                         condition = "input.attribute2 =='--------'",
                         box(
@@ -204,6 +199,7 @@ shinyUI(dashboardPage(
                         )
                         
                       ), 
+                      # for two attributes, show the association plot. 
                       conditionalPanel(
                         condition = "input.attribute2 !='--------'",
                         
@@ -220,7 +216,7 @@ shinyUI(dashboardPage(
                     )
                     
             ),
-
+          # summary page
           tabItem(tabName = "summary01",
             fluidRow(
               column(7, htmlOutput("summText")),

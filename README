@@ -1,1 +1,7 @@
+This is my first class project on basic data analysis and visulization using R. 
+The data set I used is 2018 Stack Overflow annual survey. 
+I built an web app to show the result in Shiny framework. 
+
 https://xzglovenk.shinyapps.io/SO_svy_fnl02/
+
+
