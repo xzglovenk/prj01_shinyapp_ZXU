@@ -5,13 +5,13 @@ library(shiny)
 library(googleVis)
 library(ggplot2)
 library(ggthemes)
-devtools::install_github("jcheng5/bubbles")
+devtools::install_github("jcheng5/bubbles")  # Load a developer version bubble plot
 library(plotly)
 
 # read in the csv file
 survey_data = read_csv("./survey_data_0722fnl01.csv")
 
-####### Data Manipulation #############
+####### Data Manipulation, convert the categorical data into factor #############
 
 survey_data$SkipMeals <- factor(survey_data$SkipMeals, levels = c("Never", "1~2/wk", "3~4/wk","Daily"))
 
