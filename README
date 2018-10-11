@@ -1,4 +1,4 @@
-Class project: basic data analysis and visulization using R. 
+Class project: data analysis and visulization using R. 
  
 Created an interactive R Shiny web application to visualize the StackOverflow 2018 developer survey. 
 Applied statistical tools to analyze and extract insights from the data.
